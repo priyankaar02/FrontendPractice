@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Conference ticket generator</title>
+    <link href="./css/output.css" rel="stylesheet" />
+  </head>
+  <body
+    class="w-full bg-cover bg-center"
+    style="background-image: url(assets/images/background-desktop.png)"
+  >
+    <div class="absolute w-full">
+      <!-- First SVG -->
+      <span class="absolute right-0 top-0 w-[450px] h-full"
+        ><img src="assets/images/pattern-squiggly-line-top.svg" alt="SVG 1"
+      /></span>
+      <span class="top-0"
+        ><img src="assets/images/pattern-lines.svg" alt="SVG 2"
+      /></span>
+      <span class="absolute bottom-0 left-0 w-[650px]"
+        ><img
+          src="assets/images/pattern-squiggly-line-bottom-desktop.svg"
+          alt="SVG 3"
+      /></span>
+    </div>
+
+    <main class="relative text-white">
+      <div class="flex justify-center items-center py-6">
+        <img
+          src="assets/images/logo-full.svg"
+          class="w-60 mb-4 mt-4 align-middle"
+          alt="Arrow Icon"
+        />
+      </div>
+      <div id="formContainer" class="max-w-lg mx-auto p-6">
+        <div class="p-3 text-center">
+          <h1 class="text-[40px] mb-3 font-medium">
+            Your Journey to Coding Conf 2025 Starts Here!
+          </h1>
+          <h3 class="mb-5 text-md">
+            Secure a spot at next year's biggest coding conference.
+          </h3>
+        </div>
+        <!-- Upload Avatar Input -->
+        <div class="mb-4">
+          <label class="block text-sm font-medium text-gray-600"
+            >Upload Avatar</label
+          >
+          <div
+            id="dropArea"
+            class="w-full p-8 mt-3 rounded-lg border-2 border-dashed border-gray-600 bg-gray-100/10 text-center cursor-pointer"
+          >
+            <p id="uploadText" class="text-gray-100/50">
+              <span class="flex justify-center mb-4"
+                ><img src="assets/images/icon-upload.svg" alt="upload icon"
+              /></span>
+              Drag and drop or click to upload your avatar
+            </p>
+            <input id="fileInput" type="file" accept="image/*" class="hidden" />
+            <div
+              id="previewContainer"
+              class="hidden flex flex-col items-center mt-4"
+            >
+              <img
+                id="imagePreview"
+                class="w-24 h-24 object-cover rounded-full mt-4 mx-auto"
+              />
+            </div>
+
+            <div id="buttons" class="mt-2 space-x-2 hidden">
+              <button
+                id="removeImage"
+                class="z-40 cursor-pointer border p-2 rounded-lg border-gray-600 bg-gray-100/10 text-sm"
+              >
+                Remove Image
+              </button>
+              <!-- <button
+                  id="changeImage"
+                  class="z-40 cursor-pointer border p-2 rounded-lg border-gray-600 bg-gray-100/10 text-sm"
+                >
+                  Change Image
+                </button> -->
+            </div>
+          </div>
+          <div
+            class="flex items-center space-x-2 mt-2 text-gray-100/50 text-xs"
+          >
+            <span><img src="assets/images/icon-info.svg" alt="info" /></span>
+            <span>Upload your photo (JPG or PNG, max size: 500KB)</span>
+          </div>
+          <p class="text-red-500 text-sm hidden" id="avatarError">
+            Avatar is required.
+          </p>
+        </div>
+        <!-- Full Name Input -->
+        <div class="mb-4">
+          <label for="fullname" class="block text-sm font-medium text-gray-600">
+            Full Name
+          </label>
+          <input
+            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            type="text"
+            name="fullname"
+            id="fullname"
+          />
+          <p class="text-red-500 text-sm hidden" id="fullnameError">
+            Full Name is required.
+          </p>
+        </div>
+        <!-- Email Input -->
+        <div class="mb-4">
+          <label for="email" class="block text-sm font-medium text-gray-600"
+            >Email Address</label
+          >
+          <input
+            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            type="email"
+            name="email"
+            id="email"
+          />
+          <p class="text-red-500 text-sm hidden" id="emailError">
+            Enter a valid email.
+          </p>
+        </div>
+        <!-- Username Input -->
+        <div class="mb-4">
+          <label for="username" class="block text-sm font-medium text-gray-600"
+            >Github Username</label
+          >
+          <input
+            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            type="text"
+            name="username"
+            id="username"
+          />
+          <p class="text-red-500 text-sm hidden" id="usernameError">
+            Username is required.
+          </p>
+        </div>
+        <!-- Submit Button -->
+        <div class="mt-4">
+          <button
+            id="submitBtn"
+            class="w-full mt-4 bg-[#ec4949ee] py-2 rounded-lg cursor-pointer"
+          >
+            Generate My Ticket
+          </button>
+        </div>
+      </div>
+
+      <!-- Confirmation Page (Hidden initially) -->
+      <div
+        id="confirmationPage"
+        class="hidden flex items-center justify-center"
+      >
+        <div class="text-white">
+          <h2 class="text-[30px] font-semibold mb-4 text-center">
+            Congrats,
+            <span id="confirmName"></span>! Your ticket is ready.
+          </h2>
+          <p></p>
+          <p class="mt-2 text-gray-300 text-center">
+            We've emailed your ticket to
+            <span id="confirmEmail"></span> and send updates in the run up to
+            the event.
+          </p>
+
+          <!-- Ticket UI -->
+          <div
+            class="bg-contain bg-center mt-30"
+            style="
+              background-image: url(assets/images/pattern-ticket.svg);
+              background-repeat: no-repeat;
+            "
+          >
+            <div class="max-w-lg mx-auto p-6 text-white bg-opacity-70">
+              <div class="p-3">
+                <div class="mb-20">
+                  <img
+                    src="assets/images/logo-full.svg"
+                    class="w-40"
+                    alt="Arrow Icon"
+                  />
+
+                  <p id="location" class="text-sm text-gray-400 ml-9 mt-2"></p>
+                </div>
+                <div class="flex items-center mt-3">
+                  <img
+                    id="confirmAvatar"
+                    class="w-16 h-16 object-cover border-2 rounded-md"
+                  />
+                  <div class="ml-3 text-left">
+                    <p class="font-semibold">
+                      <span id="confirmUsername"></span>
+                    </p>
+                    <p class="text-sm text-gray-400">
+                      @<span id="confirmHandle"></span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="./js/upload.js"></script>
+    <script src="./js/script.js"></script>
+  </body>
+</html>
