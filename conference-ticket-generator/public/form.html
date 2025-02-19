@@ -10,19 +10,30 @@
     class="w-full bg-cover bg-center"
     style="background-image: url(assets/images/background-desktop.png)"
   >
-    <div class="absolute w-full">
-      <!-- First SVG -->
-      <span class="absolute right-0 top-0 w-[450px] h-full"
-        ><img src="assets/images/pattern-squiggly-line-top.svg" alt="SVG 1"
-      /></span>
-      <span class="top-0"
-        ><img src="assets/images/pattern-lines.svg" alt="SVG 2"
-      /></span>
-      <span class="absolute bottom-0 left-0 w-[650px]"
-        ><img
+    <div class="absolute w-full h-full overflow-hidden">
+      <!-- First SVG (Top Right) -->
+      <span class="absolute right-0 top-0 w-48 sm:w-14 md:w-80 lg:w-96">
+        <img src="assets/images/pattern-squiggly-line-top.svg" alt="SVG 1" />
+      </span>
+
+      <!-- Second SVG (Top Left or Center) -->
+      <span class="absolute top-0 w-full">
+        <img
+          src="assets/images/pattern-lines.svg"
+          alt="SVG 2"
+          class="w-full h-auto"
+        />
+      </span>
+
+      <!-- Third SVG (Bottom Left) -->
+      <span
+        class="absolute bottom-0 left-0 hidden sm:block w-48 sm:w-64 md:w-80 lg:w-96"
+      >
+        <img
           src="assets/images/pattern-squiggly-line-bottom-desktop.svg"
           alt="SVG 3"
-      /></span>
+        />
+      </span>
     </div>
 
     <main class="relative text-white">
@@ -30,12 +41,15 @@
         <img
           src="assets/images/logo-full.svg"
           class="w-60 mb-4 mt-4 align-middle"
-          alt="Arrow Icon"
+          alt="Logo"
         />
       </div>
+      <!-- Form Container -->
       <div id="formContainer" class="max-w-lg mx-auto p-6">
         <div class="p-3 text-center">
-          <h1 class="text-[40px] mb-3 font-medium">
+          <h1
+            class="mb-3 font-medium sm:text-[30px] md:text-[30px] lg:text-[40px]"
+          >
             Your Journey to Coding Conf 2025 Starts Here!
           </h1>
           <h3 class="mb-5 text-md">
@@ -99,7 +113,7 @@
             Full Name
           </label>
           <input
-            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            class="w-full p-2 mt-3 outline-none border border-gray-600 bg-gray-100/10 rounded-lg"
             type="text"
             name="fullname"
             id="fullname"
@@ -114,7 +128,7 @@
             >Email Address</label
           >
           <input
-            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            class="w-full p-2 mt-3 border outline-none border-gray-600 bg-gray-100/10 rounded-lg"
             type="email"
             name="email"
             id="email"
@@ -129,7 +143,7 @@
             >Github Username</label
           >
           <input
-            class="w-full p-2 mt-3 border border-gray-600 bg-gray-100/10 rounded-lg"
+            class="w-full p-2 mt-3 border outline-none border-gray-600 bg-gray-100/10 rounded-lg"
             type="text"
             name="username"
             id="username"
@@ -152,49 +166,64 @@
       <!-- Confirmation Page (Hidden initially) -->
       <div
         id="confirmationPage"
-        class="hidden flex items-center justify-center"
+        class="flex items-center justify-center hidden"
       >
         <div class="text-white">
-          <h2 class="text-[30px] font-semibold mb-4 text-center">
+          <h2 class="text-[30px] font-semibold mb-4 text-center mx-2">
             Congrats,
-            <span id="confirmName"></span>! Your ticket is ready.
+            <span
+              id="confirmName"
+              class="font-bold bg-gradient-to-r from-[#EFAA7D] to-[#D46A3D] bg-clip-text text-transparent"
+            ></span
+            >! Your ticket is ready.
           </h2>
-          <p></p>
-          <p class="mt-2 text-gray-300 text-center">
+
+          <p class="mt-2 mx-5 text-gray-300 text-md text-center">
             We've emailed your ticket to
-            <span id="confirmEmail"></span> and send updates in the run up to
-            the event.
+            <span
+              id="confirmEmail"
+              class="bg-gradient-to-r from-[#EFAA7D] to-[#D46A3D] bg-clip-text text-transparent"
+            ></span>
+            and send updates in the run up to the event.
           </p>
 
           <!-- Ticket UI -->
           <div
-            class="bg-contain bg-center mt-30"
+            class="bg-cover md:bg-contain bg-center mt-10 p-4 sm:p-6 md:p-8 rounded-lg m-4"
             style="
               background-image: url(assets/images/pattern-ticket.svg);
               background-repeat: no-repeat;
             "
           >
-            <div class="max-w-lg mx-auto p-6 text-white bg-opacity-70">
+            <!-- Inner Container -->
+            <div
+              class="w-full sm:max-w-md md:max-w-lg mx-auto text-white bg-opacity-70"
+            >
               <div class="p-3">
-                <div class="mb-20">
+                <!-- Logo & Location -->
+                <div class="mb-10 sm:mb-20">
                   <img
                     src="assets/images/logo-full.svg"
-                    class="w-40"
-                    alt="Arrow Icon"
+                    class="w-54 sm:w-70"
+                    alt="Logo"
                   />
-
-                  <p id="location" class="text-sm text-gray-400 ml-9 mt-2"></p>
+                  <p
+                    id="location"
+                    class="text-xs sm:text-sm text-gray-400 sm:text-left mt-2"
+                  ></p>
                 </div>
+
+                <!-- User Info -->
                 <div class="flex items-center mt-3">
                   <img
                     id="confirmAvatar"
-                    class="w-16 h-16 object-cover border-2 rounded-md"
+                    class="w-12 sm:w-16 h-12 sm:h-16 object-cover border-2 rounded-md"
                   />
                   <div class="ml-3 text-left">
-                    <p class="font-semibold">
+                    <p class="font-semibold text-sm sm:text-base">
                       <span id="confirmUsername"></span>
                     </p>
-                    <p class="text-sm text-gray-400">
+                    <p class="text-xs sm:text-sm text-gray-400">
                       @<span id="confirmHandle"></span>
                     </p>
                   </div>
